@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffcccc, #ffe6e6);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    color: red;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+
+h1 {
+    margin-top: 60px;
+    color: #cc0000;
+}
+
+/* Mobile-friendly text */
+#message {
+    font-size: 18px;
+    width: 90%;
+    margin: auto;
+    min-height: 100px;
+}
+
+/* Buttons */
+button {
+    margin: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    max-width: 250px;
+}
+
+#yes {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+#no {
+    background-color: #333;
+    color: white;
+    position: absolute;
+    max-width: 120px;
+}
+
+/* Photo */
+img {
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Timer */
+#timer {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #444;
+}
+</style>
+</head>
+
+<body>
+
+<h1>I'm Really Sorry ❤️</h1>
+
+<p id="message"></p>
+
+<img src="mylove.jpg" alt="Us">
+
+<div id="timer"></div>
+
+<div>
+    <button id="yes" onclick="forgive()">Forgive me? 🥺</button>
+    <button id="no" onmouseover="moveButton()" ontouchstart="moveButton()">No 😤</button>
+</div>
+
+<audio id="music" loop>
+    <source src="yourmusic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Typewriter message
+const text = "I know I hurt you... and I'm really sorry. You mean everything to me. I care about you deeply. and I’m here to fix things with you. not fight against you. I promise to do better and never take you for granted. ❤️";
+
+
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+    }
+}
+typeWriter();
+
+// Move "No" button safely on mobile
+function moveButton() {
+    const btn = document.getElementById("no");
+    const maxX = window.innerWidth - btn.offsetWidth;
+    const maxY = window.innerHeight - btn.offsetHeight;
+
+    btn.style.left = Math.random() * maxX + "px";
+    btn.style.top = Math.random() * maxY + "px";
+}
+
+// Forgive action
+function forgive() {
+    document.body.innerHTML = `
+        <h1>Thank you for forgiving me ❤️</h1>
+        <p>I love you so much. I’ll make it up to you, I promise 💖</p>
+    `;
+}
+
+// Floating hearts
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+// Relationship timer (EDIT DATE)
+const startDate = new Date("2024-02-24");
+
+function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("timer").innerHTML =
+        "We've been together for " + days + " days ❤️";
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// Enable music on first tap (mobile-friendly)
+document.body.addEventListener("click", () => {
+    document.getElementById("music").play();
+}, { once: true });
+</script>
+
+</body>
+</html>
